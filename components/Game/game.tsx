@@ -239,7 +239,6 @@ export const Game = () => {
             <Box sx={{ textAlign: 'center' }}>
                 <Button>Spicy Tokens: {numTokens}</Button>
                 <Button onClick={() => roll()}>Play Now</Button>
-                <Button>Spicy points: 0</Button>
             </Box>
 
             <Box sx={{ textAlign: 'center' }}>
