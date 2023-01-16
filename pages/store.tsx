@@ -18,9 +18,7 @@ export default function Home() {
       </Head>
       <main style={CSSpage}>
         <div>
-          <p>
             <Navbar />
-          </p>
         </div>
 
         <div style={CSScentered}>

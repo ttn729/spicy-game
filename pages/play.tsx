@@ -5,6 +5,7 @@ import { Game } from '@/components/Game/game'
 import { Navbar } from '@/components/Navbar/navbar'
 
 import { CSSpage, CSScentered } from '@/styles/styles'
+import { Box } from '@mui/material'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,19 +19,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={CSSpage}>
+      <Box>
         <div>
-          <p>
             <Navbar />
-          </p>
         </div>
 
         <div style={CSScentered}>
           <Game />
         </div>
 
-
-      </main>
+      </Box>
     </>
   )
 }
