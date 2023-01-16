@@ -13,95 +13,36 @@ const getRandomNum = () => {
 
 
 export const Game = () => {
-    const [die1, setDie1] = useState(0);
-    const [die2, setDie2] = useState(0);
-    const [die3, setDie3] = useState(0);
+
+    const [dice, setDice] = useState([0, 0, 0]);
 
 
     const [numTokens, setNumTokens] = useState(3);
 
 
+    const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0])
 
-    const [counter1, setCounter1] = useState(0);
-    const [counter2, setCounter2] = useState(0);
-    const [counter3, setCounter3] = useState(0);
-    const [counter4, setCounter4] = useState(0);
-    const [counter5, setCounter5] = useState(0);
-    const [counter6, setCounter6] = useState(0);
-
-    const inc1 = () => {
-        setCounter1(counter1 + 1);
-    }
-
-    const dec1 = () => {
-        if (counter1 > 0) {
-            setCounter1(counter1 - 1);
+    const incDecCounters = (inc: number, index: number) => {
+        const newCounters = [...counters]
+        if (newCounters[index - 1] + inc >= 0) {
+            newCounters[index - 1] += inc;
+            setCounters(newCounters)
         }
     }
 
-    const inc2 = () => {
-        setCounter2(counter2 + 1);
+
+    const sumCounters = () => {
+        let total: number = 0
+        counters.forEach((counter: number) => {
+            total += counter;
+        })
+        return total;
     }
-
-    const dec2 = () => {
-        if (counter2 > 0) {
-            setCounter2(counter2 - 1);
-        }
-    }
-
-    const inc3 = () => {
-        setCounter3(counter3 + 1);
-    }
-
-
-    const dec3 = () => {
-        if (counter3 > 0) {
-            setCounter3(counter3 - 1);
-        }
-    }
-
-    const inc4 = () => {
-        setCounter4(counter4 + 1);
-    }
-
-    const dec4 = () => {
-        if (counter4 > 0) {
-            setCounter4(counter4 - 1);
-        }
-    }
-
-    const inc5 = () => {
-        setCounter5(counter5 + 1);
-    }
-
-    const dec5 = () => {
-        if (counter5 > 0) {
-            setCounter5(counter5 - 1);
-        }
-    }
-
-    const inc6 = () => {
-        setCounter6(counter6 + 1);
-    }
-
-    const dec6 = () => {
-        if (counter6 > 0) {
-            setCounter6(counter6 - 1);
-        }
-    }
-
 
 
     const onClickReset = () => {
-        setCounter1(0)
-        setCounter2(0)
-        setCounter3(0)
-        setCounter4(0)
-        setCounter5(0)
-        setCounter6(0)
+        setCounters([0, 0, 0, 0, 0, 0])
     }
-
-
 
 
     const roll = () => {
@@ -112,24 +53,35 @@ export const Game = () => {
 
         }
 
-        if (counter1 + counter2 + counter3 + counter4 + counter5 + counter6 == 0) {
+        if (sumCounters() == 0) {
             alert("Please place a bet before playing")
             return;
         }
 
-        if (counter1 + counter2 + counter3 + counter4 + counter5 + counter6 > numTokens) {
+        if (sumCounters() > numTokens) {
             alert("Not enough tokens");
             return;
         }
 
-        setNumTokens(numTokens - (counter1 + counter2 + counter3 + counter4 + counter5 + counter6));
 
-        setDie1(getRandomNum());
-        setDie2(getRandomNum());
-        setDie3(getRandomNum());
 
+        // Roll the dice
+        const newDice: Array<number> = [getRandomNum(), getRandomNum(), getRandomNum()]
+        setDice(newDice)
+
+
+        // Calculate earnings
+        let earnings: number = 0
+        newDice.forEach((die: number) => {
+            earnings += Number(counters[die - 1])
+        })
+
+        // Adjust for the number of tokens spent + earnings
+        setNumTokens(numTokens - sumCounters() + earnings);
+
+
+        // Reset counters
         onClickReset();
-
     }
 
     return (
@@ -147,9 +99,9 @@ export const Game = () => {
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
-                                <Button onClick={() => dec1()}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counter1}</Button>
-                                <Button onClick={() => inc1()}>+</Button>
+                                <Button onClick={() => incDecCounters(-1, 1)}>-</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[0]}</Button>
+                                <Button onClick={() => incDecCounters(1, 1)}>+</Button>
                             </Box>
                         </Box>
                         <Box>
@@ -161,9 +113,9 @@ export const Game = () => {
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
-                                <Button onClick={() => dec2()}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counter2}</Button>
-                                <Button onClick={() => inc2()}>+</Button>
+                                <Button onClick={() => incDecCounters(-1, 2)}>-</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[1]}</Button>
+                                <Button onClick={() => incDecCounters(1, 2)}>+</Button>
                             </Box>
                         </Box>
                         <Box>
@@ -175,9 +127,9 @@ export const Game = () => {
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                <Button onClick={() => dec3()}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counter3}</Button>
-                                <Button onClick={() => inc3()}>+</Button>
+                                <Button onClick={() => incDecCounters(-1, 3)}>-</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[2]}</Button>
+                                <Button onClick={() => incDecCounters(1, 3)}>+</Button>
                             </Box>
                         </Box>
                     </Box>
@@ -191,9 +143,9 @@ export const Game = () => {
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                <Button onClick={() => dec4()}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counter4}</Button>
-                                <Button onClick={() => inc4()}>+</Button>
+                                <Button onClick={() => incDecCounters(-1, 4)}>-</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[3]}</Button>
+                                <Button onClick={() => incDecCounters(1, 4)}>+</Button>
                             </Box>
                         </Box>
                         <Box>
@@ -205,9 +157,9 @@ export const Game = () => {
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                <Button onClick={() => dec5()}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counter5}</Button>
-                                <Button onClick={() => inc5()}>+</Button>
+                                <Button onClick={() => incDecCounters(-1, 5)}>-</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[4]}</Button>
+                                <Button onClick={() => incDecCounters(1, 5)}>+</Button>
                             </Box>
                         </Box>
                         <Box>
@@ -219,9 +171,9 @@ export const Game = () => {
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                <Button onClick={() => dec6()}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counter6}</Button>
-                                <Button onClick={() => inc6()}>+</Button>
+                                <Button onClick={() => incDecCounters(-1, 6)}>-</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[5]}</Button>
+                                <Button onClick={() => incDecCounters(1, 6)}>+</Button>
                             </Box>
                         </Box>
                     </Box>
@@ -229,9 +181,9 @@ export const Game = () => {
 
 
                 <Box>
-                    <h1>{die1}</h1>
-                    <h1>{die2}</h1>
-                    <h1>{die3}</h1>
+                    <h1>{dice[0]}</h1>
+                    <h1>{dice[1]}</h1>
+                    <h1>{dice[2]}</h1>
                 </Box>
 
             </Box>
