@@ -1,5 +1,8 @@
 import Image from 'next/image'
 import crab from '../../public/crab.png'
+import gourd from '../../public/gourd.png'
+import shrimp from '../../public/shrimp.png'
+
 import { useState } from "react";
 import { Box, Button } from '@mui/material';
 
@@ -63,8 +66,6 @@ export const Game = () => {
             return;
         }
 
-
-
         // Roll the dice
         const newDice: Array<number> = [getRandomNum(), getRandomNum(), getRandomNum()]
         setDice(newDice)
@@ -72,9 +73,28 @@ export const Game = () => {
 
         // Calculate earnings
         let earnings: number = 0
-        newDice.forEach((die: number) => {
-            earnings += Number(counters[die - 1])
-        })
+
+
+        // All 3 dice are the same
+        if (newDice[0] == newDice[1] && newDice[1] == newDice[2]) {
+                // You get your money back + 3 times what you bet
+                earnings = 4 * counters[newDice[0] - 1];
+        }
+        // 2 out of the 3 dices are the same
+        else if (newDice[0] == newDice[1]) {
+            earnings = (3 * counters[newDice[0] - 1]) + (2 * counters[newDice[2] - 1])
+        }
+        else if (newDice[0] == newDice[2]) {
+            earnings = (3 * counters[newDice[0] - 1]) + (2 * counters[newDice[1] - 1])
+        }
+        else if (newDice[1] == newDice[2]) {
+            earnings = (3 * counters[newDice[1] - 1]) + (2 * counters[newDice[0] - 1])
+        }
+        // None of the dice are the same
+        else {
+            earnings  = (2 * counters[newDice[0] - 1]) + (2 * counters[newDice[1] - 1]) + (2 * counters[newDice[2] - 1])
+        }
+
 
         // Adjust for the number of tokens spent + earnings
         setNumTokens(numTokens - sumCounters() + earnings);
@@ -108,8 +128,8 @@ export const Game = () => {
                             <h2>2</h2>
 
                             <Image
-                                src={crab}
-                                alt="Crab"
+                                src={gourd}
+                                alt="Gourd"
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
@@ -166,8 +186,8 @@ export const Game = () => {
                             <h2>6</h2>
 
                             <Image
-                                src={crab}
-                                alt="Crab"
+                                src={shrimp}
+                                alt="Shrimp"
                                 width={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
