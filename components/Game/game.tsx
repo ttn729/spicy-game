@@ -10,6 +10,7 @@ import deer from '../../public/deer.png'
 
 import { useState } from "react";
 import { Box, Button } from '@mui/material';
+import { Dicebar } from './dicebar'
 
 
 
@@ -217,27 +218,7 @@ export const Game = () => {
                     </Box>
                 </Box>
 
-
-                <Box>
-                    <Image
-                        src={animals[dice[0] - 1]}
-                        alt="dice"
-                        width={50}
-                        height={50}
-                    />
-                    <Image
-                        src={animals[dice[1] - 1]}
-                        alt="dice"
-                        width={50}
-                        height={50}
-                    />                    
-                    <Image
-                    src={animals[dice[2] - 1]}
-                    alt="dice"
-                    width={50}
-                    height={50}
-                />
-                </Box>
+                <Dicebar{...dice}/>
 
             </Box>
 
