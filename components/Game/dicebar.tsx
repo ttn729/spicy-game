@@ -30,5 +30,7 @@ export const Dicebar = (dice:Array<number>) => {
         </>
         )
     }
+    return (<></>)
+
    
 }
