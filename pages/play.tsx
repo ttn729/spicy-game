@@ -20,12 +20,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <main style={CSSpage}>
+
       <Navbar />
       <Box sx={{
         textAlign: 'center', position: 'absolute', top: '50%', left: '50%', transform: "translate(-50%, -50%)"
       }}>
         <Game />
       </Box>
+
+      </main>
+
     </>
   )
 }
