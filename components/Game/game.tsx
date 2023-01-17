@@ -1,3 +1,9 @@
+import React from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
+
+
 import Image from 'next/image'
 import crab from '../../public/crab.png'
 import gourd from '../../public/gourd.png'
@@ -5,6 +11,7 @@ import shrimp from '../../public/shrimp.png'
 import fish from '../../public/fish.png'
 import chicken from '../../public/chicken.png'
 import deer from '../../public/deer.png'
+
 
 
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
@@ -119,9 +126,12 @@ export const Game = () => {
 
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <Box>
-                    
+
                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                        <HelpOutlineIcon/>
+    
+                        <Popup trigger={<HelpOutlineIcon />} position="right center">
+                            <div>Bet with your tokens to get more tokens. The game ends when you run out of tokens, so choose wisely!</div>
+                        </Popup>
 
                         <Box>
                             <Image
@@ -211,7 +221,7 @@ export const Game = () => {
                     </Box>
                 </Box>
 
-                <Dicebar{...dice}/>
+                <Dicebar{...dice} />
 
             </Box>
 
