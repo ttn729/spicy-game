@@ -40,28 +40,25 @@ export const Game = () => {
     const [numTokens, setNumTokens] = useState(3);
 
 
-    const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0])
+    // The first element is the total counters selected at a given time
+    const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0, 0])
 
     const incDecCounters = (inc: number, index: number) => {
         const newCounters = [...counters]
-        if (newCounters[index - 1] + inc >= 0) {
-            newCounters[index - 1] += inc;
+        if (counters[0] == numTokens && inc == 1) {
+            return
+        }
+
+        if (newCounters[index] + inc >= 0) {
+            newCounters[index] += inc;
+            newCounters[0] += inc; // Add to the total count
             setCounters(newCounters)
         }
     }
 
 
-    const sumCounters = () => {
-        let total: number = 0
-        counters.forEach((counter: number) => {
-            total += counter;
-        })
-        return total;
-    }
-
-
     const onClickReset = () => {
-        setCounters([0, 0, 0, 0, 0, 0])
+        setCounters([0, 0, 0, 0, 0, 0, 0])
     }
 
 
@@ -73,12 +70,12 @@ export const Game = () => {
 
         }
 
-        if (sumCounters() == 0) {
+        if (counters[0] == 0) {
             alert("Please place a bet before playing")
             return;
         }
 
-        if (sumCounters() > numTokens) {
+        if (counters[0] > numTokens) {
             alert("Not enough tokens");
             return;
         }
@@ -114,7 +111,7 @@ export const Game = () => {
 
 
         // Adjust for the number of tokens spent + earnings
-        setNumTokens(numTokens - sumCounters() + earnings);
+        setNumTokens(numTokens - counters[0] + earnings);
 
 
         // Reset counters
@@ -145,7 +142,7 @@ export const Game = () => {
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
                                 <Button onClick={() => incDecCounters(-1, 1)}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counters[0]}</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[1]}</Button>
                                 <Button onClick={() => incDecCounters(1, 1)}>+</Button>
                             </Box>
                         </Box>
@@ -158,7 +155,7 @@ export const Game = () => {
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
                                 <Button onClick={() => incDecCounters(-1, 2)}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counters[1]}</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[2]}</Button>
                                 <Button onClick={() => incDecCounters(1, 2)}>+</Button>
                             </Box>
                         </Box>
@@ -172,7 +169,7 @@ export const Game = () => {
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 3)}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counters[2]}</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[3]}</Button>
                                 <Button onClick={() => incDecCounters(1, 3)}>+</Button>
                             </Box>
                         </Box>
@@ -189,7 +186,7 @@ export const Game = () => {
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 4)}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counters[3]}</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[4]}</Button>
                                 <Button onClick={() => incDecCounters(1, 4)}>+</Button>
                             </Box>
                         </Box>
@@ -203,7 +200,7 @@ export const Game = () => {
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 5)}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counters[4]}</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[5]}</Button>
                                 <Button onClick={() => incDecCounters(1, 5)}>+</Button>
                             </Box>
                         </Box>
@@ -217,7 +214,7 @@ export const Game = () => {
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 6)}>-</Button>
-                                <Button disabled variant='contained' color='secondary'>{counters[5]}</Button>
+                                <Button disabled variant='contained' color='secondary'>{counters[6]}</Button>
                                 <Button onClick={() => incDecCounters(1, 6)}>+</Button>
                             </Box>
                         </Box>
