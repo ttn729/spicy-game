@@ -19,9 +19,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <Box>
-        <Navbar />
+
+      <Navbar />
+      <Box sx={{
+        textAlign: 'center', position: 'absolute', top: '50%', left: '50%', transform: "translate(-50%, -50%)"
+      }}>
         <Game />
       </Box>
     </>

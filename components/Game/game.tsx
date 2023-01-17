@@ -123,17 +123,20 @@ export const Game = () => {
 
     return (
         <>
+            <h1>Welcome to the Spicy Game
+                <Popup trigger={<HelpOutlineIcon />} position="right center">
+                    <div>Bet with your tokens to get more tokens. The game ends when you run out of tokens, so choose wisely!</div>
+                </Popup>
+            </h1>
 
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <Box>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-    
-                        <Popup trigger={<HelpOutlineIcon />} position="right center">
-                            <div>Bet with your tokens to get more tokens. The game ends when you run out of tokens, so choose wisely!</div>
-                        </Popup>
 
-                        <Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', }}>
+
+
+                        <Box sx={{ justifyContent: 'center' }}>
                             <Image
                                 src={deer}
                                 alt="Deer"
@@ -146,7 +149,7 @@ export const Game = () => {
                                 <Button onClick={() => incDecCounters(1, 1)}>+</Button>
                             </Box>
                         </Box>
-                        <Box>
+                        <Box sx={{ justifyContent: 'center' }}>
                             <Image
                                 src={gourd}
                                 alt="Gourd"
@@ -159,7 +162,7 @@ export const Game = () => {
                                 <Button onClick={() => incDecCounters(1, 2)}>+</Button>
                             </Box>
                         </Box>
-                        <Box>
+                        <Box sx={{ justifyContent: 'center' }}>
                             <Image
                                 src={chicken}
                                 alt="Chicken"
@@ -176,7 +179,7 @@ export const Game = () => {
                     </Box>
 
                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                        <Box>
+                        <Box sx={{ justifyContent: 'center' }}>
                             <Image
                                 src={fish}
                                 alt="Fish"
@@ -190,7 +193,7 @@ export const Game = () => {
                                 <Button onClick={() => incDecCounters(1, 4)}>+</Button>
                             </Box>
                         </Box>
-                        <Box>
+                        <Box sx={{ justifyContent: 'center' }}>
                             <Image
                                 src={crab}
                                 alt="Crab"
@@ -204,7 +207,7 @@ export const Game = () => {
                                 <Button onClick={() => incDecCounters(1, 5)}>+</Button>
                             </Box>
                         </Box>
-                        <Box>
+                        <Box sx={{ justifyContent: 'center' }}>
                             <Image
                                 src={shrimp}
                                 alt="Shrimp"
@@ -226,12 +229,12 @@ export const Game = () => {
             </Box>
 
             <Box sx={{ textAlign: 'center' }}>
-                <Button>Spicy Tokens: {numTokens}</Button>
+                <h1>Spicy Tokens: {numTokens}</h1>
                 <Button onClick={() => roll()}>Play Now</Button>
+                <Button onClick={() => onClickReset()}>Reset</Button>
             </Box>
 
             <Box sx={{ textAlign: 'center' }}>
-                <Button onClick={() => onClickReset()}>Reset</Button>
             </Box>
 
         </>
