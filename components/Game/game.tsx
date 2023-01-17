@@ -92,21 +92,21 @@ export const Game = () => {
         // All 3 dice are the same
         if (newDice[0] == newDice[1] && newDice[1] == newDice[2]) {
             // You get your money back + 3 times what you bet
-            earnings = 4 * counters[newDice[0] - 1];
+            earnings = 4 * counters[newDice[0]];
         }
         // 2 out of the 3 dices are the same
         else if (newDice[0] == newDice[1]) {
-            earnings = (3 * counters[newDice[0] - 1]) + (2 * counters[newDice[2] - 1])
+            earnings = (3 * counters[newDice[0]]) + (2 * counters[newDice[2]])
         }
         else if (newDice[0] == newDice[2]) {
-            earnings = (3 * counters[newDice[0] - 1]) + (2 * counters[newDice[1] - 1])
+            earnings = (3 * counters[newDice[0]]) + (2 * counters[newDice[1]])
         }
         else if (newDice[1] == newDice[2]) {
-            earnings = (3 * counters[newDice[1] - 1]) + (2 * counters[newDice[0] - 1])
+            earnings = (3 * counters[newDice[1]]) + (2 * counters[newDice[0]])
         }
         // None of the dice are the same
         else {
-            earnings = (2 * counters[newDice[0] - 1]) + (2 * counters[newDice[1] - 1]) + (2 * counters[newDice[2] - 1])
+            earnings = (2 * counters[newDice[0]]) + (2 * counters[newDice[1]]) + (2 * counters[newDice[2]])
         }
 
 
