@@ -2,9 +2,15 @@ import Image from 'next/image'
 import crab from '../../public/crab.png'
 import gourd from '../../public/gourd.png'
 import shrimp from '../../public/shrimp.png'
+import fish from '../../public/fish.png'
+import chicken from '../../public/chicken.png'
+import deer from '../../public/deer.png'
+
+
 
 import { useState } from "react";
 import { Box, Button } from '@mui/material';
+
 
 
 const MAX_NUM = 6;
@@ -14,6 +20,8 @@ const getRandomNum = () => {
     return Math.floor(Math.random() * (MAX_NUM)) + 1;
 }
 
+
+const animals = [deer, gourd, chicken, fish, crab, shrimp]
 
 export const Game = () => {
 
@@ -77,8 +85,8 @@ export const Game = () => {
 
         // All 3 dice are the same
         if (newDice[0] == newDice[1] && newDice[1] == newDice[2]) {
-                // You get your money back + 3 times what you bet
-                earnings = 4 * counters[newDice[0] - 1];
+            // You get your money back + 3 times what you bet
+            earnings = 4 * counters[newDice[0] - 1];
         }
         // 2 out of the 3 dices are the same
         else if (newDice[0] == newDice[1]) {
@@ -92,7 +100,7 @@ export const Game = () => {
         }
         // None of the dice are the same
         else {
-            earnings  = (2 * counters[newDice[0] - 1]) + (2 * counters[newDice[1] - 1]) + (2 * counters[newDice[2] - 1])
+            earnings = (2 * counters[newDice[0] - 1]) + (2 * counters[newDice[1] - 1]) + (2 * counters[newDice[2] - 1])
         }
 
 
@@ -114,9 +122,10 @@ export const Game = () => {
                             <h2>1</h2>
 
                             <Image
-                                src={crab}
-                                alt="Crab"
+                                src={deer}
+                                alt="Deer"
                                 width={150}
+                                height={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
                                 <Button onClick={() => incDecCounters(-1, 1)}>-</Button>
@@ -131,6 +140,7 @@ export const Game = () => {
                                 src={gourd}
                                 alt="Gourd"
                                 width={150}
+                                height={150}
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
                                 <Button onClick={() => incDecCounters(-1, 2)}>-</Button>
@@ -142,9 +152,11 @@ export const Game = () => {
                             <h2>3</h2>
 
                             <Image
-                                src={crab}
-                                alt="Crab"
+                                src={chicken}
+                                alt="Chicken"
                                 width={150}
+                                height={150}
+
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 3)}>-</Button>
@@ -158,9 +170,11 @@ export const Game = () => {
                         <Box>
                             <h2>4</h2>
                             <Image
-                                src={crab}
-                                alt="Crab"
+                                src={fish}
+                                alt="Fish"
                                 width={150}
+                                height={150}
+
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 4)}>-</Button>
@@ -175,6 +189,8 @@ export const Game = () => {
                                 src={crab}
                                 alt="Crab"
                                 width={150}
+                                height={150}
+
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 5)}>-</Button>
@@ -189,6 +205,8 @@ export const Game = () => {
                                 src={shrimp}
                                 alt="Shrimp"
                                 width={150}
+                                height={150}
+
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Button onClick={() => incDecCounters(-1, 6)}>-</Button>
@@ -201,9 +219,24 @@ export const Game = () => {
 
 
                 <Box>
-                    <h1>{dice[0]}</h1>
-                    <h1>{dice[1]}</h1>
-                    <h1>{dice[2]}</h1>
+                    <Image
+                        src={animals[dice[0] - 1]}
+                        alt="dice"
+                        width={50}
+                        height={50}
+                    />
+                    <Image
+                        src={animals[dice[1] - 1]}
+                        alt="dice"
+                        width={50}
+                        height={50}
+                    />                    
+                    <Image
+                    src={animals[dice[2] - 1]}
+                    alt="dice"
+                    width={50}
+                    height={50}
+                />
                 </Box>
 
             </Box>
