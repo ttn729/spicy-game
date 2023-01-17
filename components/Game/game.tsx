@@ -7,6 +7,7 @@ import chicken from '../../public/chicken.png'
 import deer from '../../public/deer.png'
 
 
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 import { useState } from "react";
 import { Box, Button } from '@mui/material';
@@ -115,13 +116,14 @@ export const Game = () => {
 
     return (
         <>
+
             <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <Box>
+                    
                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                        <HelpOutlineIcon/>
 
                         <Box>
-                            <h2>1</h2>
-
                             <Image
                                 src={deer}
                                 alt="Deer"
@@ -135,8 +137,6 @@ export const Game = () => {
                             </Box>
                         </Box>
                         <Box>
-                            <h2>2</h2>
-
                             <Image
                                 src={gourd}
                                 alt="Gourd"
@@ -150,8 +150,6 @@ export const Game = () => {
                             </Box>
                         </Box>
                         <Box>
-                            <h2>3</h2>
-
                             <Image
                                 src={chicken}
                                 alt="Chicken"
@@ -169,7 +167,6 @@ export const Game = () => {
 
                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                         <Box>
-                            <h2>4</h2>
                             <Image
                                 src={fish}
                                 alt="Fish"
@@ -184,8 +181,6 @@ export const Game = () => {
                             </Box>
                         </Box>
                         <Box>
-                            <h2>5</h2>
-
                             <Image
                                 src={crab}
                                 alt="Crab"
@@ -200,8 +195,6 @@ export const Game = () => {
                             </Box>
                         </Box>
                         <Box>
-                            <h2>6</h2>
-
                             <Image
                                 src={shrimp}
                                 alt="Shrimp"
