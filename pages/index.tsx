@@ -27,6 +27,7 @@ export default function Home() {
   }
 
   if (user) {
+    console.log(user.displayName);
     router.push("/play")
   }
 
