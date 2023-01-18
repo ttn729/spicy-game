@@ -2,11 +2,39 @@ import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import Link from 'next/link'
 import { CSSpage, CSScentered } from '@/styles/styles'
+import { initFirebase } from '@/utils/firebase'
+
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+import Router, { useRouter } from 'next/router'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export default function Home() {
+
+
+  const app = initFirebase();
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (user) {
+    router.push("/play")
+  }
+
+  const signIn = async () => {
+    const result = await(signInWithPopup(auth,provider));
+    console.log(result.user);
+  }
+
   return (
     <>
       <Head>
@@ -20,7 +48,7 @@ export default function Home() {
           <h1>
             Welcome to Spicy Game!
           </h1>
-          <Link href="/play">Login</Link>
+          <button onClick={signIn}>Sign In</button>
 
         </div>
       </main>

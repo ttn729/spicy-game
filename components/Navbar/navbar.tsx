@@ -1,4 +1,8 @@
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useRouter } from 'next/router';
 import Link from 'next/link'
+import { app } from '../../utils/firebase';
 
 
 const CSSinline = {
@@ -15,6 +19,20 @@ const CSSnavbar = {
 } as const;
 
 export const Navbar = () => {
+
+    const auth = getAuth(app);
+    const router = useRouter();
+    const [user, loading] = useAuthState(auth);
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (!user) {
+        router.push('/');
+    }
+
+
     return (
         <>
             <ul style={CSSnavbar}>
@@ -28,7 +46,7 @@ export const Navbar = () => {
                     <Link href="/store">Store</Link>
                 </li>
                 <li style={CSSinline}>
-                    <Link href="/">Logout</Link>
+                    <button onClick={() => auth.signOut()}>Logout</button>
                 </li>
             </ul>
         </>
