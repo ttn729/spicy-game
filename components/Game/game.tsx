@@ -20,6 +20,8 @@ import { useState } from "react";
 import { Box, Button } from '@mui/material';
 import { Dicebar } from './dicebar'
 
+import { useDispatch, useSelector } from "react-redux";
+import { UPDATE } from '@/redux/tokenSlice';
 
 
 const MAX_NUM = 6;
@@ -37,7 +39,11 @@ export const Game = () => {
     const [dice, setDice] = useState([0, 0, 0]);
 
 
-    const [numTokens, setNumTokens] = useState(3);
+
+    const numTokens = useSelector((state:any) => state.token.numTokens)
+    const dispatch = useDispatch();
+
+   // const [numTokens, setNumTokens] = useState(3);
 
 
     // The first element is the total counters selected at a given time
@@ -111,7 +117,7 @@ export const Game = () => {
 
 
         // Adjust for the number of tokens spent + earnings
-        setNumTokens(numTokens - counters[0] + earnings);
+        dispatch(UPDATE(numTokens - counters[0] + earnings));
 
 
         // Reset counters
