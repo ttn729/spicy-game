@@ -7,8 +7,6 @@ import { app } from '../../utils/firebase';
 
 export const DisplayStatus = () => {
 
-
-
     const auth = getAuth(app);
     const [user, loading] = useAuthState(auth);
 
