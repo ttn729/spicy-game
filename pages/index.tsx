@@ -8,7 +8,6 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import Router, { useRouter } from 'next/router'
-import { fetchDB } from '@/components/FetchDB/fetchdb'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from "../utils/firebase";
 import { useDispatch } from 'react-redux'

@@ -30,7 +30,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { app } from '../../utils/firebase';
 import { getAuth } from 'firebase/auth';
 
-import { fetchDB } from '../FetchDB/fetchdb';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 
 
