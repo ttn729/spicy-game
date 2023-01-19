@@ -13,9 +13,9 @@ export const DisplayStatus = () => {
     const [user, loading] = useAuthState(auth);
 
 
+    const numTokens = useSelector((state: any) => state.token.numTokens)
 
     if (user) {
-        const numTokens = useSelector((state: any) => state.token.numTokens)
         return (
             <Box sx={{ margin: 5 }}>
                 <h1>Hello {user.displayName}</h1>
