@@ -26,9 +26,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { app } from '../../utils/firebase';
 import { getAuth } from 'firebase/auth';
 
-import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { getPoints } from '../FetchDB/fetchdb';
-import { setConstantValue } from 'typescript';
 import { AnimalCounters } from './animalCounters';
 
 const MAX_NUM = 6;
