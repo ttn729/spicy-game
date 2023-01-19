@@ -12,5 +12,5 @@ export const getPoints = async (user: any) => {
         const numTokens = Number(docSnap.data().numTokens);
         return numTokens;
     }
-    return 5;
+    return 20;
 }
