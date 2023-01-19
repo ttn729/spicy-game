@@ -3,24 +3,18 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 import Image from 'next/image';
-import crab from '../../public/crab.png';
-import gourd from '../../public/gourd.png';
-import shrimp from '../../public/shrimp.png';
-import fish from '../../public/fish.png';
-import chicken from '../../public/chicken.png';
-import deer from '../../public/deer.png';
 
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 import { useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Dicebar } from './dicebar';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_COUNTERS, UPDATE } from '@/redux/tokenSlice';
 
 import { db } from '../../utils/firebase';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc} from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { app } from '../../utils/firebase';
@@ -28,6 +22,7 @@ import { getAuth } from 'firebase/auth';
 
 import { getPoints } from '../FetchDB/fetchdb';
 import { AnimalCounters } from './animalCounters';
+import { animals } from './animalFaces';
 
 const MAX_NUM = 6;
 
@@ -35,8 +30,6 @@ const MAX_NUM = 6;
 const getRandomNum = () => {
   return Math.floor(Math.random() * MAX_NUM) + 1;
 };
-
-const animals = [deer, gourd, chicken, fish, crab, shrimp];
 
 export const Game = () => {
   const auth = getAuth(app);
@@ -53,18 +46,6 @@ export const Game = () => {
 
   // const [numTokens, setNumTokens] = useState(3);
 
-  const incDecCounters = (inc: number, index: number) => {
-    const newCounters = [...counters];
-    if (counters[0] == numTokens && inc == 1) {
-      return;
-    }
-
-    if (newCounters[index] + inc >= 0) {
-      newCounters[index] += inc;
-      newCounters[0] += inc; // Add to the total count
-      dispatch(SET_COUNTERS(newCounters));
-    }
-  };
 
   const onClickReset = () => {
     dispatch(SET_COUNTERS([0, 0, 0, 0, 0, 0, 0]));
@@ -164,25 +145,20 @@ export const Game = () => {
         <Box>
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <Box sx={{ justifyContent: 'center' }}>
-              <Image src={deer} alt="Deer" width={150} height={150} />
+              <Image src={animals[0]} alt="Deer" width={150} height={150} />
               <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
-                {/* <Button disabled variant="contained" color="secondary">
-                  {counters[1]}
-                </Button>  */}
-
                 <AnimalCounters counters={counters} numTokens={numTokens} idx={1} />
-
               </Box>
             </Box>
             <Box sx={{ justifyContent: 'center' }}>
-              <Image src={gourd} alt="Gourd" width={150} height={150} />
+              <Image src={animals[1]} alt="Gourd" width={150} height={150} />
               <Box sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
                 <AnimalCounters counters={counters} numTokens={numTokens} idx={2} />
 
               </Box>
             </Box>
             <Box sx={{ justifyContent: 'center' }}>
-              <Image src={chicken} alt="Chicken" width={150} height={150} />
+              <Image src={animals[2]} alt="Chicken" width={150} height={150} />
               <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <AnimalCounters counters={counters} numTokens={numTokens} idx={3} />
 
@@ -192,19 +168,19 @@ export const Game = () => {
 
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <Box sx={{ justifyContent: 'center' }}>
-              <Image src={fish} alt="Fish" width={150} height={150} />
+              <Image src={animals[3]} alt="Fish" width={150} height={150} />
               <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <AnimalCounters counters={counters} numTokens={numTokens} idx={4} />
               </Box>
             </Box>
             <Box sx={{ justifyContent: 'center' }}>
-              <Image src={crab} alt="Crab" width={150} height={150} />
+              <Image src={animals[4]} alt="Crab" width={150} height={150} />
               <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <AnimalCounters counters={counters} numTokens={numTokens} idx={5} />
               </Box>
             </Box>
             <Box sx={{ justifyContent: 'center' }}>
-              <Image src={shrimp} alt="Shrimp" width={150} height={150} />
+              <Image src={animals[5]} alt="Shrimp" width={150} height={150} />
               <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <AnimalCounters counters={counters} numTokens={numTokens} idx={6} />
               </Box>
