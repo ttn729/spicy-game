@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
-
 import { Game } from '@/components/Game/game'
 import { Navbar } from '@/components/Navbar/navbar'
-
-import { CSSpage, CSScentered } from '@/styles/styles'
+import { CSSpage} from '@/styles/styles'
 import { Box } from '@mui/material'
+
+
 
 
 const inter = Inter({ subsets: ['latin'] })

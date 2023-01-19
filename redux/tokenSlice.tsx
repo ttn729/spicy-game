@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit/";
 import { AppState } from "./store";
 import { HYDRATE } from "next-redux-wrapper";
+import { fetchDB } from "@/components/FetchDB/fetchdb";
 
 // Type for our state
 export interface TokenState {
     numTokens: number;
 }
-
 
 const initialState: TokenState = {
     numTokens: 3,

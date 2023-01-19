@@ -2,13 +2,12 @@ import { Box } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { userAgent } from "next/server";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useSelector } from "react-redux";
 import { app } from '../../utils/firebase';
 import { DisplayStatus } from "../DisplayStatus/displaystatus";
 
 
 export const Rewards = () => {
-
-
 
         return (<>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
@@ -23,6 +23,18 @@ import { Dicebar } from './dicebar'
 import { useDispatch, useSelector } from "react-redux";
 import { UPDATE } from '@/redux/tokenSlice';
 
+import { db } from "../../utils/firebase";
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+import { app } from '../../utils/firebase';
+import { getAuth } from 'firebase/auth';
+
+import { fetchDB } from '../FetchDB/fetchdb';
+import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
+
+
+
 
 const MAX_NUM = 6;
 
@@ -34,20 +46,24 @@ const getRandomNum = () => {
 
 const animals = [deer, gourd, chicken, fish, crab, shrimp]
 
+
 export const Game = () => {
+    const auth = getAuth(app);
+
 
     const [dice, setDice] = useState([0, 0, 0]);
-
-
-
-    const numTokens = useSelector((state:any) => state.token.numTokens)
-    const dispatch = useDispatch();
-
-   // const [numTokens, setNumTokens] = useState(3);
+    const [user, loading] = useAuthState(auth);
+    const [data, setData] = useState({});
 
 
     // The first element is the total counters selected at a given time
     const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0, 0])
+
+
+    const numTokens = useSelector((state: any) => state.token.numTokens)
+    const dispatch = useDispatch();
+
+    // const [numTokens, setNumTokens] = useState(3);
 
     const incDecCounters = (inc: number, index: number) => {
         const newCounters = [...counters]
@@ -65,6 +81,21 @@ export const Game = () => {
 
     const onClickReset = () => {
         setCounters([0, 0, 0, 0, 0, 0, 0])
+    }
+
+    const addToDB = async (numTokens: number) => {
+        if (user) {
+            try {
+                const docRef = await setDoc(doc(db, "users", user.uid), {
+                    email: user.email,
+                    numTokens: numTokens
+                });
+                console.log("Document written with ID: ", user.uid);
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
+
     }
 
 
@@ -115,14 +146,43 @@ export const Game = () => {
             earnings = (2 * counters[newDice[0]]) + (2 * counters[newDice[1]]) + (2 * counters[newDice[2]])
         }
 
-
         // Adjust for the number of tokens spent + earnings
         dispatch(UPDATE(numTokens - counters[0] + earnings));
-
+        addToDB(numTokens - counters[0] + earnings);
 
         // Reset counters
         onClickReset();
     }
+
+    // useEffect(() => {
+
+    //     const fetchDB = async () => {
+    //         let numTokens: number = 3;
+
+    //         if (user) {
+
+    //             const docRef = doc(db, "users", user.uid);
+    //             const docSnap = await getDoc(docRef);
+
+    //             if (docSnap.exists()) {
+    //                 console.log("Document data:", docSnap.data());
+    //                 numTokens = Number(docSnap.data().numTokens);
+    //             }
+    //             else {
+    //                 console.log("No data found");
+    //             }
+
+    //         }
+    //         setData(numTokens)
+    //         console.log("We have from the db " + data + " tokens")
+    //     };
+
+    //     fetchDB();
+    // }, []);
+
+    // console.log("Hello, my number is " + data);
+    // dispatch(UPDATE(data));
+
 
     return (
         <>

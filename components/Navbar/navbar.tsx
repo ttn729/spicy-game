@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { app } from '../../utils/firebase';
 
-
 const CSSinline = {
     display: "inline-block",
     padding: "5px",
@@ -31,8 +30,7 @@ export const Navbar = () => {
     if (!user) {
         router.push('/');
     }
-
-
+    
     return (
         <>
             <ul style={CSSnavbar}>

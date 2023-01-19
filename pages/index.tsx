@@ -8,13 +8,18 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import Router, { useRouter } from 'next/router'
+import { fetchDB } from '@/components/FetchDB/fetchdb'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from "../utils/firebase";
+import { useDispatch } from 'react-redux'
+import { UPDATE } from '@/redux/tokenSlice'
+
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export default function Home() {
-
 
   const app = initFirebase();
   const provider = new GoogleAuthProvider();
@@ -28,6 +33,7 @@ export default function Home() {
 
   if (user) {
     console.log(user.displayName);
+
     router.push("/play")
   }
 
