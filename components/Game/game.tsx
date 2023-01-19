@@ -31,7 +31,7 @@ import { app } from '../../utils/firebase';
 import { getAuth } from 'firebase/auth';
 
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
-import { fetchDB, getPoints } from '../FetchDB/fetchdb';
+import { getPoints } from '../FetchDB/fetchdb';
 
 
 
@@ -167,7 +167,7 @@ export const Game = () => {
             hello();
             console.log("User: ", user);
         }
-    }, [user]);
+    }, [user, hello]);
 
 
     if (isLoading) {
