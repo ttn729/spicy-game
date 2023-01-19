@@ -1,6 +1,5 @@
 import { UPDATE } from '@/redux/tokenSlice';
 import { getAuth } from 'firebase/auth';
-import { userAgent } from 'next/server';
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch, useSelector } from 'react-redux';

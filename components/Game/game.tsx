@@ -125,7 +125,7 @@ export const Game = () => {
       hello();
       console.log('User: ', user);
     }
-  }, [user, hello]);
+  }, [user, hello]);    
 
   if (isLoading) {
     return null;

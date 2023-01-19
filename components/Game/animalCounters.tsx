@@ -1,6 +1,5 @@
 import { SET_COUNTERS } from '@/redux/tokenSlice';
 import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export const AnimalCounters = (props: any) => {

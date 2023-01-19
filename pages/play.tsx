@@ -6,8 +6,6 @@ import { CSSpage} from '@/styles/styles'
 import { Box } from '@mui/material'
 
 
-
-
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
