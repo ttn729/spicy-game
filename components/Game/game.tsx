@@ -31,6 +31,7 @@ import { app } from '../../utils/firebase';
 import { getAuth } from 'firebase/auth';
 
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
+import { fetchDB, getPoints } from '../FetchDB/fetchdb';
 
 
 
@@ -59,7 +60,8 @@ export const Game = () => {
     const [counters, setCounters] = useState([0, 0, 0, 0, 0, 0, 0])
 
 
-    const numTokens = useSelector((state: any) => state.token.numTokens)
+    const {numTokens, isLoading} = useSelector((state: any) => state.token)
+
     const dispatch = useDispatch();
 
     // const [numTokens, setNumTokens] = useState(3);
@@ -153,36 +155,24 @@ export const Game = () => {
         onClickReset();
     }
 
-    // useEffect(() => {
+    const hello = async () => {
 
-    //     const fetchDB = async () => {
-    //         let numTokens: number = 3;
+        const result = await getPoints(user);
+        dispatch(UPDATE(result));
+        console.log(result);
+    }
 
-    //         if (user) {
-
-    //             const docRef = doc(db, "users", user.uid);
-    //             const docSnap = await getDoc(docRef);
-
-    //             if (docSnap.exists()) {
-    //                 console.log("Document data:", docSnap.data());
-    //                 numTokens = Number(docSnap.data().numTokens);
-    //             }
-    //             else {
-    //                 console.log("No data found");
-    //             }
-
-    //         }
-    //         setData(numTokens)
-    //         console.log("We have from the db " + data + " tokens")
-    //     };
-
-    //     fetchDB();
-    // }, []);
-
-    // console.log("Hello, my number is " + data);
-    // dispatch(UPDATE(data));
+    useEffect(() => {
+        if (user) {
+            hello();
+            console.log("User: ", user);
+        }
+    }, [user]);
 
 
+    if (isLoading) {
+        return null;
+    }
     return (
         <>
             <h1>Welcome to the Spicy Game

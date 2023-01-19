@@ -5,10 +5,12 @@ import { HYDRATE } from "next-redux-wrapper";
 // Type for our state
 export interface TokenState {
     numTokens: number;
+    isLoading: boolean;
 }
 
 const initialState: TokenState = {
-    numTokens: 3,
+    numTokens: 5,
+    isLoading: true
 };
 
 export const tokenSlice = createSlice({
@@ -18,6 +20,7 @@ export const tokenSlice = createSlice({
     reducers: {
         UPDATE: (state, action) => {
             state.numTokens = action.payload;
+            state.isLoading = false;
         }
     },
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
