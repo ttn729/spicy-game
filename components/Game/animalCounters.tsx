@@ -21,7 +21,7 @@ export const AnimalCounters = (props: any) => {
 
   return (
     <>
-      <Button onClick={() => incDecCounters(-1, props.idx)}>-</Button>
+      <Button tabIndex={-1} onClick={() => incDecCounters(-1, props.idx)}>-</Button>
 
       <TextField
         id="outlined-number"
@@ -46,7 +46,7 @@ export const AnimalCounters = (props: any) => {
           inputProps: { min: 0, max: props.numTokens - props.counters[0] + props.counters[props.idx] },
         }}
       />
-      <Button onClick={() => incDecCounters(1, props.idx)}>+</Button>
+      <Button tabIndex={-1} onClick={() => incDecCounters(1, props.idx)}>+</Button>
     </>
   );
 };

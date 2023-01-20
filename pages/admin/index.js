@@ -1,13 +1,15 @@
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import { app } from '../../utils/firebase';
 import { Navbar } from '@/components/Navbar/navbar';
 import { CSSpage } from '@/styles/styles';
-import { Box } from '@mui/material';
+import { Box, getListSubheaderUtilityClass } from '@mui/material';
 import { Router } from '@mui/icons-material';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
+import { getUsers } from '../../components/FetchDB/fetchdb';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -55,8 +57,6 @@ export default function Home() {
           <h1>Admin Page</h1>
           <h1>Admin Page</h1>
           <h1>Admin Page</h1>
-
-
         </Box>
       </main>
     </>

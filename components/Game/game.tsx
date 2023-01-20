@@ -20,7 +20,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { app } from '../../utils/firebase';
 import { getAuth } from 'firebase/auth';
 
-import { getPoints } from '../FetchDB/fetchdb';
+import { getPoints, getUsers } from '../FetchDB/fetchdb';
 import { AnimalCounters } from './animalCounters';
 import { animals } from './animalFaces';
 
@@ -57,7 +57,9 @@ export const Game = () => {
         const docRef = await setDoc(doc(db, 'users', user.uid), {
           email: user.email,
           numTokens: numTokens,
+          userName: user.displayName,
         });
+        console.log("userName is " + user.displayName)
         console.log('Document written with ID: ', user.uid);
       } catch (e) {
         console.error('Error adding document: ', e);
@@ -161,7 +163,6 @@ export const Game = () => {
               <Image src={animals[2]} alt="Chicken" width={150} height={150} />
               <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <AnimalCounters counters={counters} numTokens={numTokens} idx={3} />
-
               </Box>
             </Box>
           </Box>
